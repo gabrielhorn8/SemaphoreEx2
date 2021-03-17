@@ -8,7 +8,7 @@ public class Ex2Thread extends Thread {
 	private String nome;
 	private int tempo;
 	double tempoini, tempofi;
-	private double percentual;
+	private int percentual;
 
 	public Ex2Thread(int idThread, Semaphore semaforo) {
 		// TODO Auto-generated constructor stub
@@ -40,9 +40,13 @@ public class Ex2Thread extends Thread {
 				e.printStackTrace();
 			}
 			tempoini += 100;
-			percentual = tempoini / tempofi;
-			System.out.println("#" + idThread + "Prato: " + nome + " percentual: " + percentual);
-		}
+			percentual = (int)((tempoini / tempofi)*100);
+			if(percentual>=100){
+				System.out.println("#" + idThread + "Prato: " + nome + " percentual: 100%");
+			}else{
+			System.out.println("#" + idThread + "Prato: " + nome + " percentual: " + percentual+"%");
+			}
+		}	
 		System.out.println("#" + idThread + "Prato: " + nome + " Finalizado");
 		try {
 			semaforo.acquire();
